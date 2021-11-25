@@ -16,10 +16,11 @@ const App: React.FC = () => {
                 <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/about" element={<About/>}/>
-                    
+    
                 </Routes>
             </Router>
         </ApolloProvider>
+      
     );
 }
 

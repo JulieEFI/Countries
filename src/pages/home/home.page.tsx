@@ -4,7 +4,6 @@ import { Button, Carousel } from "antd";
 import { Layout } from "antd";
 import "./home.page.css";
 import "antd/dist/antd.css";
-import Sider from "antd/lib/layout/Sider";
 const { Content } = Layout;
 
 

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 
 import { Country } from "../../common/interfaces/country.interface";
-import { Alert, Button, Input, Space, Spin, Table } from "antd";
+import {  Button, Input, Spin, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { SearchOutlined } from "@ant-design/icons";
 import { Typography } from 'antd';
@@ -213,37 +213,36 @@ const CountriesGrid: React.FC<CountriesGridProps> = ({
   };
 
   return (
-    <div className="table">
-      {countries.length > 0 ? (
-        <>
-         <Title level={1}>Info about countries</Title>
-          <Table<Country>
-            rowKey="name"
-            columns={columns}
-            dataSource={countries}
-            size='large'
-            bordered
-         
-            />
-          <div className="table__button">
-            <Button
-              type="primary"
-              shape="default"
-              size="large"
-              onClick={goToHomePage}
-            >
-              Go Back
-            </Button>
-          </div>
-        </>
-      ) : (
-        <>
-          {" "}
-          <Spin className="table__loading" tip="Loading...">
-          </Spin>
-        </>
-      )}
-    </div>
+     <div className="table">
+          {countries.length > 0 ? (
+              <>
+                  <Title level={1}>Info about countries</Title>
+                  <Table<Country>
+                      rowKey="name"
+                      columns={columns}
+                      dataSource={countries}
+                      size='large'
+                      bordered />
+                  <div className="table__button">
+                      <Button
+                          type="primary"
+                          shape="default"
+                          size="large"
+                          onClick={goToHomePage}
+                      >
+                          Go Back
+                      </Button>
+                  </div>
+              </>
+          ) : (
+              <>
+                  {" "}
+                  <Spin className="table__loading" tip="Loading...">
+                  </Spin>
+              </>
+          )}
+      </div>
+ 
   );
 };
 
