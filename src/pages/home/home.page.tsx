@@ -11,7 +11,7 @@ const Home: React.FC = () => {
     const navigate = useNavigate();
 
     const goToAnotherPage= () => {
-            navigate(`/about`);
+            navigate(`/countries`);
     }
     
   return (

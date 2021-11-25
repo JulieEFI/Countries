@@ -9,7 +9,7 @@ const HeaderMain:React.FC = () => {
         <Header className="">
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
             <Menu.Item key='1'><NavLink to="/">Home</NavLink></Menu.Item> 
-            <Menu.Item key='2'><NavLink to="/about">Countries</NavLink></Menu.Item> 
+            <Menu.Item key='2'><NavLink to="/countries">Countries</NavLink></Menu.Item> 
             </Menu>
         </Header>
     )

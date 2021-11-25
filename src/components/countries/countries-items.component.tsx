@@ -2,10 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router";
 
 import { Country } from "../../common/interfaces/country.interface";
-import {  Button, Input, Spin, Table } from "antd";
+import { Button, Input, Spin, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { SearchOutlined } from "@ant-design/icons";
-import { Typography } from 'antd';
+import { Typography } from "antd";
 
 const { Title } = Typography;
 
@@ -16,6 +16,8 @@ interface CountriesGridProps {
 const CountriesGrid: React.FC<CountriesGridProps> = ({
   countries,
 }: CountriesGridProps) => {
+  const searchInputHolder: { current: Input | null } = { current: null };
+
   const columns: ColumnsType<Country> = [
     {
       key: "name",
@@ -54,7 +56,7 @@ const CountriesGrid: React.FC<CountriesGridProps> = ({
     },
     {
       key: "name",
-      title: "Cuontry",
+      title: "Country",
       dataIndex: "name",
       filters: [
         {
@@ -78,32 +80,45 @@ const CountriesGrid: React.FC<CountriesGridProps> = ({
           value: "Germany",
         },
       ],
-      filterDropdown: ({setSelectedKeys, selectedKeys, confirm}) => {
-        return (
-            <>
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        confirm,
+        clearFilters,
+      }) => (
+        <div style={{ padding: 8 }}>
           <Input
-            autoFocus
-            placeholder="Country..."
+            ref={(node) => {
+              searchInputHolder.current = node;
+            }}
+            placeholder="Search Country"
             value={selectedKeys[0]}
-            onChange={(e) => {
-                setSelectedKeys(e.target.value?[e.target.value]:[])
-            }}
-            onPressEnter={() => {
-                confirm()
-            }}
-            onBlur={() => {
-                confirm()
-            }}
-          ></Input>
-          <Button onClick={()=> {confirm()}} type="primary">Search</Button>
-          </>
-        );
-      },
+            onChange={(e) =>
+              setSelectedKeys(e.target.value ? [e.target.value] : [])
+            }
+            onPressEnter={() => confirm()}
+          />
+          <Button
+            type="primary"
+            onClick={() => confirm()}
+            icon={<SearchOutlined />}
+            size="small"
+          >
+            Search
+          </Button>
+          <Button onClick={clearFilters}>Reset</Button>
+        </div>
+      ),
       filterIcon: () => {
         return <SearchOutlined></SearchOutlined>;
       },
-      onFilter:(value:any, record:any) => {
-          return record?.name?.toLowerCase().includes(value.toLowerCase())
+      onFilterDropdownVisibleChange: (visible) => {
+        if (visible) {
+          setTimeout(() => searchInputHolder.current?.select());
+        }
+      },
+      onFilter: (value: any, record: any) => {
+        return record?.capital?.toLowerCase().includes(value.toLowerCase());
       },
       sorter: (a, b) => {
         if (a.name < b.name) return -1;
@@ -128,33 +143,45 @@ const CountriesGrid: React.FC<CountriesGridProps> = ({
       key: "name",
       title: "Capital",
       dataIndex: "capital",
-      filterDropdown: ({setSelectedKeys, selectedKeys, confirm}) => {
-        return (
-            <>
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        confirm,
+        clearFilters,
+      }) => (
+        <div style={{ padding: 8 }}>
           <Input
-            autoFocus
-            placeholder="Capital..."
+            ref={(node) => {
+              searchInputHolder.current = node;
+            }}
+            placeholder="Search capital"
             value={selectedKeys[0]}
-            onChange={(e) => {
-                setSelectedKeys(e.target.value?[e.target.value]:[])
-            }}
-            onPressEnter={() => {
-                confirm()
-            }}
-            onBlur={() => {
-                confirm()
-            }}
-          ></Input>
-          <Button onClick={()=> {confirm()}} type="primary">Search</Button>
-          
-          </>
-        );
-      },
+            onChange={(e) =>
+              setSelectedKeys(e.target.value ? [e.target.value] : [])
+            }
+            onPressEnter={() => confirm()}
+          />
+          <Button
+            type="primary"
+            onClick={() => confirm()}
+            icon={<SearchOutlined />}
+            size="small"
+          >
+            Search
+          </Button>
+          <Button onClick={clearFilters}>Reset</Button>
+        </div>
+      ),
       filterIcon: () => {
         return <SearchOutlined></SearchOutlined>;
       },
-      onFilter:(value:any, record:any) => {
-          return record?.capital?.toLowerCase().includes(value.toLowerCase())
+      onFilterDropdownVisibleChange: (visible) => {
+        if (visible) {
+          setTimeout(() => searchInputHolder.current?.select());
+        }
+      },
+      onFilter: (value: any, record: any) => {
+        return record?.capital?.toLowerCase().includes(value.toLowerCase());
       },
       sorter: (a, b) => {
         if (a.capital < b.capital) return -1;
@@ -213,36 +240,35 @@ const CountriesGrid: React.FC<CountriesGridProps> = ({
   };
 
   return (
-     <div className="table">
-          {countries.length > 0 ? (
-              <>
-                  <Title level={1}>Info about countries</Title>
-                  <Table<Country>
-                      rowKey="name"
-                      columns={columns}
-                      dataSource={countries}
-                      size='large'
-                      bordered />
-                  <div className="table__button">
-                      <Button
-                          type="primary"
-                          shape="default"
-                          size="large"
-                          onClick={goToHomePage}
-                      >
-                          Go Back
-                      </Button>
-                  </div>
-              </>
-          ) : (
-              <>
-                  {" "}
-                  <Spin className="table__loading" tip="Loading...">
-                  </Spin>
-              </>
-          )}
-      </div>
- 
+    <div className="table">
+      {countries.length > 0 ? (
+        <>
+          <Title level={1}>Info about countries</Title>
+          <Table<Country>
+            rowKey="name"
+            columns={columns}
+            dataSource={countries}
+            size="large"
+            bordered
+          />
+          <div className="table__button">
+            <Button
+              type="primary"
+              shape="default"
+              size="large"
+              onClick={goToHomePage}
+            >
+              Go Back
+            </Button>
+          </div>
+        </>
+      ) : (
+        <>
+          {" "}
+          <Spin className="table__loading" tip="Loading..."></Spin>
+        </>
+      )}
+    </div>
   );
 };
 

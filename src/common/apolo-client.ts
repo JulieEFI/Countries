@@ -1,13 +1,6 @@
-import {
-    ApolloClient,
-    InMemoryCache,
-    ApolloProvider,
-    HttpLink,
-    from,
-  } from "@apollo/client";
+import { ApolloClient, InMemoryCache, HttpLink, from } from "@apollo/client";
 
 import { onError } from "@apollo/client/link/error";
-
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -20,14 +13,13 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const link = from([
-    errorLink,
-    new HttpLink({ uri: "https://countries.trevorblades.com/" }),
-  ]);
-  
- 
+  errorLink,
+  new HttpLink({ uri: "https://countries.trevorblades.com/" }),
+]);
+
 const client = new ApolloClient({
-    cache: new InMemoryCache(),
-    link: link,
+  cache: new InMemoryCache(),
+  link: link,
 });
 
 export default client;
