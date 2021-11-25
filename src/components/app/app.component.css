@@ -1,0 +1,33 @@
+@import '~antd/dist/antd.css';
+
+body {
+    background: rgb(6,27,91);
+    background: linear-gradient(90deg, rgba(6,27,91,0.7511379551820728) 0%, rgba(5,39,79,1) 100%);
+}
+
+.home__main {
+    width: 60vw;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.table {
+    padding-top: 20px; 
+}
+
+.table__loading {
+   display: flex;
+   justify-content: center;
+    background:inherit;
+
+}
+
+.table__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+  
+}

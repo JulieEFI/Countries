@@ -1,0 +1,31 @@
+.home {
+  margin-top: 5vh;
+  height: 80vh;
+  width: 50vw;
+  color: #fff;
+  line-height: 160px;
+  text-align: center;
+}
+
+.home-background1 {
+  background: grey url("../../common/images/1.jpg");
+  background-repeat: no-repeat; 
+  background-size: cover;
+}
+
+.home-background2 {
+  background: grey url("../../common/images/2jpg.jpg");
+  background-repeat: no-repeat; 
+  background-size: cover;
+}
+.home-background1 {
+  background: grey url("../../common/images/3.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.home-background4 {
+  background: grey url("../../common/images/1.jpg");
+  background-repeat: no-repeat; 
+  background-size: cover;
+}
