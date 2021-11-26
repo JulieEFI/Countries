@@ -1,4 +1,3 @@
-//import { emoji } from 'emoji-dictionary';
 export interface Country {
     dataIndex: any;
     key: number;

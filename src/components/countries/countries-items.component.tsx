@@ -16,6 +16,11 @@ interface CountriesGridProps {
 const CountriesGrid: React.FC<CountriesGridProps> = ({
   countries,
 }: CountriesGridProps) => {
+    const navigate = useNavigate();
+
+    const goToHomePage = () => {
+      navigate(`/`);
+    };
   const searchInputHolder: { current: Input | null } = { current: null };
 
   const columns: ColumnsType<Country> = [
@@ -118,7 +123,7 @@ const CountriesGrid: React.FC<CountriesGridProps> = ({
         }
       },
       onFilter: (value: any, record: any) => {
-        return record?.capital?.toLowerCase().includes(value.toLowerCase());
+        return record?.name?.toLowerCase().includes(value.toLowerCase());
       },
       sorter: (a, b) => {
         if (a.name < b.name) return -1;
@@ -232,12 +237,6 @@ const CountriesGrid: React.FC<CountriesGridProps> = ({
       sortDirections: ["descend"],
     },
   ];
-
-  const navigate = useNavigate();
-
-  const goToHomePage = () => {
-    navigate(`/`);
-  };
 
   return (
     <div className="table">
